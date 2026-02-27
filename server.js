@@ -1,13 +1,18 @@
-let configDB = require('./config/db');
-let app = require("./config/express");
-let http = require('http');
+require("dotenv").config();
 
-configDB().catch(console.dir);
+const connectDB = require("./config/db");
+let app = require("./config/express");
+let http = require("http");
+
+// connect to MongoDB
+connectDB().catch(console.dir);
+
+// create server
 var server = http.createServer(app);
 
-server.on('listening', onListening);
+// listen on port 3000
 server.listen(3000);
 
-function onListening(){
-    console.log('Server running at http://localhost:3000/');
-}
+server.on("listening", function () {
+  console.log("Server running at http://localhost:3000/");
+});
